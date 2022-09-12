@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime, timedelta
+from rest_framework.response import Response
 
 
 #department model 
@@ -8,14 +9,6 @@ class Department(models.Model):
     abbreviation = models.CharField(max_length=100)
     manager = models.ForeignKey('Employee', on_delete=models.CASCADE, related_name='manager', null=True, blank=True)
     employees = models.ManyToManyField('Employee', related_name='employees', blank=True, default=None)
-
-    #add employee to department, department cant have more than 20 employees
-    def add_employee(self, employee):
-        if self.employees.count() < 20:
-            self.employees.add(employee)
-            return True
-        return False
-
 
     def __str__(self):
         return self.name
@@ -70,17 +63,7 @@ class Employee(models.Model):
             self.vacations.add(vacation)
             self.vacation_days -= (end_date - start_date).days
             self.save()
-        else:
-            return("Not enough vacation days")
     
-    #method to change employee position, changes vacation days and salary of employee to that of position, stores previous position in previous_positions of employee model
-    def change_position(self, position):
-        self.previous_positions.add(self.position)
-        self.position = position
-        self.vacation_days = position.vacation_days
-        self.salary = position.salary
-        self.save()
-
 
     def __str__(self):
         return self.name
