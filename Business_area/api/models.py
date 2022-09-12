@@ -4,9 +4,18 @@ from datetime import datetime, timedelta
 
 #department model 
 class Department(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     abbreviation = models.CharField(max_length=100)
     manager = models.ForeignKey('Employee', on_delete=models.CASCADE, related_name='manager', null=True, blank=True)
+    employees = models.ManyToManyField('Employee', related_name='employees', blank=True, default=None)
+
+    #add employee to department, department cant have more than 20 employees
+    def add_employee(self, employee):
+        if self.employees.count() < 20:
+            self.employees.add(employee)
+            return True
+        return False
+
 
     def __str__(self):
         return self.name
@@ -14,7 +23,7 @@ class Department(models.Model):
 
 #position model for employees
 class Position(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     salary = models.IntegerField()
     vacation_days = models.IntegerField()
 
@@ -33,19 +42,17 @@ class Vacation(models.Model):
 
 #employe model to keep track of employee information
 class Employee(models.Model):
-    id_mum = models.IntegerField()
-    name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    patronymic = models.CharField(max_length=50)
-    address = models.CharField(max_length=50)
-    passport = models.CharField(max_length=50)
-    salary = models.IntegerField()
+    name = models.CharField(max_length=50, default='')
+    surname = models.CharField(max_length=50, default='')
+    patronymic = models.CharField(max_length=50, default='')
+    address = models.CharField(max_length=50, default='')
+    passport = models.CharField(max_length=50, default='')
+    salary = models.IntegerField(default=0)
     dob = models.DateField()
-    position = models.CharField(max_length=50)
-    previous_positions = models.ManyToManyField(Position, related_name='previous_positions')
-    vacation_days = models.IntegerField()
-    vacations = models.ManyToManyField(Vacation, related_name='vacations')
+    position = models.CharField(max_length=50, default='')
+    previous_positions = models.ManyToManyField(Position, related_name='previous_positions', default=None, blank=True)
+    vacation_days = models.IntegerField(default=0)
+    vacations = models.ManyToManyField(Vacation, related_name='vacations', default=None, blank=True)
     last_raise = models.DateField(default=datetime.now)
 
     #method to give employee raise if they have been with the company for 1 year or has been 1 year since last raise, gives raise of 1.2%
