@@ -22,6 +22,8 @@ The system should issue reports:
 To run the project:
     -create a local virtual envoirnment and execute the command "pip install -r requirements.txt" to install any dependancies
     -go into the "Business_area" directory
+    -create a local database with postgres
+    -update settings to work with database
     -run local server using "python manage.py runserver" command
 
 To do and expected time for each objective, actual time taken for completion will be updates as tasks are completed:  expected|taken
