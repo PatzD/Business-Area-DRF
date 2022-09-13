@@ -31,4 +31,18 @@ To do and expected time for each objective, actual time taken for completion wil
     -Api endpoints to access information and create new entries                                                             7h|4h
     -Tests                                                                                                                  5h|4h
 
+Api enpoints are as follows:
+    -department/ - returns all departments
+    -department/<int:id>/ - works with GET, PUT, DELETE methods, returns department with id
+    -position/ - returns all positions
+    -position/<int:id>/ - works with GET, PUT, DELETE methods, returns position with id
+    -employee/ - returns all employees
+    -employee/<int:id>/ - works with GET, PUT, DELETE methods, returns employee with id
+    -add_employee_to_department/ - works with POST method, adds employee to department
+    -give_raise/<int:id>/ - works with POST method, gives raise to employee with id, if working for more than 1 year
+    -give_vacation/<int:id>/ - works with POST method, gives vacation to employee with id, if working for more than 1 year
+    -change_position/ - works with POST method, changes position of employee with id, if working for more than 1 year
+
+
+
 
