@@ -27,8 +27,8 @@ To run the project:
 To do and expected time for each objective, actual time taken for completion will be updates as tasks are completed:  expected|taken
     -Basic setup with postgres and admin                                                                                    1h|45m
     -Setup of models as well as serializers                                                                                 3h|1.5h
-    -Setup methods for models and recording of history of previous vacations and positions                                  4h|0h
-    -Api endpoints to access information and create new entries                                                            7h|0h
-    -Tests                                                                                                                 5h|0h
+    -Setup methods for models and recording of history of previous vacations and positions                                  4h|2h
+    -Api endpoints to access information and create new entries                                                             7h|4h
+    -Tests                                                                                                                  5h|4h
 
 
